@@ -37,7 +37,7 @@
 				var lineIndex = index + i;
 				var line = lines[i];
 
-				extractEmailFromLine.insert(line.trim().replace(/\s/, ''));
+				extractEmailFromLine.insert(line.trim().replace(/\s+/, ''));
 			}
 
 			// progress is a position of the last read line as % from whole file length

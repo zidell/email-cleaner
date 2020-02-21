@@ -1,44 +1,43 @@
-"Normal Email", "example1@example.com"
-"Normal Email", "example2@example.com"
-"Normal Email", "example3@example.com"
-"Normal Email", "example4@example.com"
-"Normal Email", "example5@example.com"
-"Normal Email", "example6@example.com"
-"Normal Email", "example7@example.com"
-"Normal Email", "example8@example.com"
-"Normal Email", "example9@example.com"
-"Normal Email", "example10@example.com"
-"Normal Email", "example11@example.com"
-"Normal Email", "example12@example.com"
-"Normal Email", "example13@example.com"
-"Normal Email", "example14@example.com"
-"Normal Email", "example15@example.com"
-"Normal Email", "example16@example.com"
-"Normal Email", "example17@example.com"
-"Normal Email", "example18@example.com"
-"Normal Email", "example19@example.com"
-"Normal Email", "example20@example.com"
-"Normal Email", "example21@example.com"
-"Normal Email", "example22@example.com"
-"Normal Email", "example23@example.com"
-"Normal Email", "example24@example.com"
-"Normal Email", "example25@example.com"
-"Normal Email", "example26@example.com"
-"Normal Email", "example27@example.com"
-"Normal Email", "example28@example.com"
-"Normal Email", "example29@example.com"
-"Duplicated Email", "example21@example.com"
-"Duplicated Email", "example22@example.com"
-"Duplicated Email", "example23@example.com"
-"Duplicated Email", "example24@example.com"
-"Duplicated Email", "example25@example.com"
-"Duplicated Email", "example26@example.com"
-"Duplicated Email", "example27@example.com"
-"Duplicated Email", "example28@example.com"
-"Duplicated Email", "example29@example.com"
-"Abnormal Email", "@example.com"
-"Abnormal Email", "example22@aa@example.com"
-"Abnormal Email", "example23@example"
-"Space Test", "exampl   e40@example"
-"Space Test", "exampl  e41@example"
-"Space Test", "exampl e42@example"
+example1@example.com
+example2@example.com
+example3@example.com
+example4@example.com
+example5@example.com
+example6@example.com
+example7@example.com
+example8@example.com
+example9@example.com
+example10@example.com
+example11@example.com
+example12@example.com
+example13@example.com
+example14@example.com
+example15@example.com
+example16@example.com
+example17@example.com
+example18@example.com
+example19@example.com
+example20@example.com
+example21@example.com
+example22@example.com
+example23@example.com
+example24@example.com
+example25@example.com
+example26@example.com
+example27@example.com
+example28@example.com
+example29@example.com
+example21@example.com
+example22@example.com
+example23@example.com
+example24@example.com
+example25@example.com
+example26@example.com
+example27@example.com
+example28@example.com
+example29@example.com
+@example.com
+example23@example
+exampl   e40@example.com
+exampl  e41@example.com
+exampl e42@example.com
