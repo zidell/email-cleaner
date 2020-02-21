@@ -125,7 +125,7 @@ export const download = (() => {
 })();
 
 const downloadEachChunk = (chunkArr, count) => {
-	fx.volume = 1;
+	fx.volume = 0.7;
 	fx.currentTime = 0;
 	fx.play();
 	const arrWithNum = chunkArr.map((email, i) => {
