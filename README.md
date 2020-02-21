@@ -1,3 +1,5 @@
+![스크린샷](screenshot.gif)
+
 ## Getting start
 
 ```
