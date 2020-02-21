@@ -8,6 +8,7 @@
 		completeImport,
 	} from './store.js';
 	let enableNext = false;
+	let status = '';
 	// import Papa from 'papaparse';
 
 	const handleFiles = e => {
@@ -17,6 +18,7 @@
 		}
 
 		resetEmails();
+		status = 'importing';
 
 		var navigator = new LineNavigator(file);
 		var indexToStartWith = 0;
@@ -35,7 +37,7 @@
 				var lineIndex = index + i;
 				var line = lines[i];
 
-				extractEmailFromLine.insert(line);
+				extractEmailFromLine.insert(line.trim().replace(/\s/, ''));
 			}
 
 			// progress is a position of the last read line as % from whole file length
@@ -43,6 +45,7 @@
 			// End of file
 			if (isEof) {
 				completeImport();
+				status = 'done';
 				enableNext = true;
 				return false;
 			}
@@ -53,15 +56,28 @@
 	};
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+	input[type='file'] {
+		display: none;
+	}
+</style>
 
 <div class="top">
-	<h1>원본 CSV를 선택해주세요.</h1>
-	<input type="file" on:change="{handleFiles}" />
-	count: {$emailLength}
+	<h1>원본 이메일리스트 CSV를 선택</h1>
+	<label class="btn btn-lg btn-primary">
+		<input type="file" on:change="{handleFiles}" />
+		파일 선택
+	</label>
+
+	<h2>
+		{#if status === 'importing'} 인식중... {:else if status === 'done'}
+		인식된 메일주소 {$emailLength}개 {/if}
+	</h2>
 </div>
 <div class="bottom">
 	{#if enableNext}
-	<button on:click="{step.next}">next</button>
+	<button class="btn btn-lg btn-secondary" on:click="{step.next}">
+		다음 >
+	</button>
 	{/if}
 </div>

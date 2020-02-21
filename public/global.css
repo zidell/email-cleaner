@@ -1,22 +1,41 @@
 html,
 body {
-	padding: 0;
-	margin: 0;
-	overflow: hidden;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Gothic A1';
 }
 
 #body {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
+
 #body .top {
-	flex: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
+
 #body .bottom {
-	height: 70px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin: 0.5em 0;
+    opacity: 0.8;
+    text-align: center;
+}
+
+h2 {
+    margin: 0.5em 0;
+    font-size: 1.2rem;
+    opacity: 0.6;
+    text-align: center;
 }

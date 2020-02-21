@@ -9,15 +9,31 @@
 		emailLength.update();
 		step.next();
 	};
+	const placeholder= [
+		'1. 잘못된 메일 주소 형식 입니다. 수신 메일: xxx@naver.con',
+		'2. 잘못된 메일 주소 형식 입니다. 수신 메일: xxx@naver.com',
+	].join("\n");
 </script>
 
+<style lang="scss">
+	textarea {
+		width: 80%;
+		max-width: 600px;
+		height: 200px;
+		font-size:0.9rem;
+		&::placeholder {
+			color: #ccc;
+		}
+	}
+</style>
+
 <div class="top">
-	<h1>토스트에 쪼개진 단위로 등록을 시도하고, 오류가 날 때마다 아래에 추가하세요.</h1>
-	<textarea bind:value />
+	<h1>각 파일을 업로드하고<br/>잘못된 메일을 아래에 붙여넣기</h1>
+	<textarea class="form-control" bind:value placeholder={placeholder}/>
 </div>
 
 <div class="bottom">
 	{#if enableNext}
-	<button on:click="{handleSubmit}">next</button>
+	<button class="btn btn-lg btn-secondary" on:click="{handleSubmit}">다음 ></button>
 	{/if}
 </div>

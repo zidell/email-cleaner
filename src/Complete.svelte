@@ -1,7 +1,13 @@
+<script>
+	import { restart } from './store.js';
+</script>
+
 <div class="top">
-	<h1>이메일을 발송하십시오.</h1>
+	<h1>이메일을 발송하세요</h1>
 </div>
 
 <div class="bottom">
-	<button>처음부터 다시하기</button>
+	<button class="btn btn-lg btn-warning" on:click="{restart}">
+		&lt; 다시 시작
+	</button>
 </div>

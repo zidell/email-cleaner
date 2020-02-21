@@ -9,24 +9,30 @@
 <div class="top">
 	{#if $step === 1}
 	<h1>
-		단순히 업로드 단위로 쪼개진 파일입니다.
+		다운로드 버튼을 여러 번 클릭
 	</h1>
 	{:else}
-	<h1>정제된 최종 파일입니다</h1>
+	<h1>최종 다운로드 버튼을 여러 번 클릭</h1>
+	<h2>최종 메일주소 {$emailLength}개</h2>
 	{/if}
-	<h2>아래의 다운로드 버튼을 여러 번 클릭하십시오.</h2>
 
 	<div>
 		{#if $download.count < $download.total}
-		<button on:click="{download.saveAs}">
-			Download({$download.count}/{$download.total})
+		<button class="btn btn-lg btn-info" on:click="{download.saveAs}">
+			{$download.count + 1}번째 파일 다운받기
 		</button>
-		{:else} Completed {/if}
+		{:else}
+		<button class="btn btn-lg btn-outline-dark" disabled>
+			모두 다운받음
+		</button>
+		{/if}
 	</div>
 </div>
 
 <div class="bottom">
 	{#if enableNext}
-	<button on:click="{step.next}">next</button>
+	<button class="btn btn-lg btn-secondary" on:click="{step.next}">
+		다음 >
+	</button>
 	{/if}
 </div>

@@ -2,6 +2,8 @@ import { writable, get } from 'svelte/store';
 import FileSaver from 'file-saver';
 import Papa from 'papaparse';
 
+const fx = new Audio('/mario-coin-sound.mp3');
+
 const CHUNK_SIZE = 9999;
 
 Array.prototype.unique = function() {
@@ -24,6 +26,12 @@ export let emailLength = (() => {
 		subscribe,
 	};
 })();
+
+export let restart = () => {
+	if (confirm('처음부터 다시 시작하시겠습니까?')) {
+		location.reload();
+	}
+};
 
 export const resetEmails = () => {
 	emails = [];
@@ -115,6 +123,9 @@ export const download = (() => {
 })();
 
 const downloadEachChunk = (chunkArr, count) => {
+	fx.volume = 1;
+	fx.currentTime = 0;
+	fx.play();
 	const arrWithNum = chunkArr.map((email, i) => {
 		return [i + 1, email];
 	});
