@@ -55,13 +55,13 @@
 
 <style lang="scss"></style>
 
-<div>
+<div class="top">
+	<h1>원본 CSV를 선택해주세요.</h1>
 	<input type="file" on:change="{handleFiles}" />
 	count: {$emailLength}
-
-	<div>
-		{#if enableNext}
-		<button on:click="{step.next}">next</button>
-		{/if}
-	</div>
+</div>
+<div class="bottom">
+	{#if enableNext}
+	<button on:click="{step.next}">next</button>
+	{/if}
 </div>
