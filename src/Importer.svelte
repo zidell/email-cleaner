@@ -1,6 +1,13 @@
 <script>
 	import { onMount } from 'svelte';
-	import { step, extractEmailFromLine } from './store.js';
+	import {
+		step,
+		resetEmails,
+		emailLength,
+		extractEmailFromLine,
+		completeImport,
+	} from './store.js';
+	let enableNext = false;
 	// import Papa from 'papaparse';
 
 	const handleFiles = e => {
@@ -8,6 +15,8 @@
 		if (/\.csv$/i.test(file.name) === false) {
 			return false;
 		}
+
+		resetEmails();
 
 		var navigator = new LineNavigator(file);
 		var indexToStartWith = 0;
@@ -33,7 +42,8 @@
 
 			// End of file
 			if (isEof) {
-				step.next();
+				completeImport();
+				enableNext = true;
 				return false;
 			}
 
@@ -47,4 +57,11 @@
 
 <div>
 	<input type="file" on:change="{handleFiles}" />
+	count: {$emailLength}
+
+	<div>
+		{#if enableNext}
+		<button on:click="{step.next}">next</button>
+		{/if}
+	</div>
 </div>

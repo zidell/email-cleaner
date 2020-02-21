@@ -1,6 +1,12 @@
-import { writable } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import FileSaver from 'file-saver';
 import Papa from 'papaparse';
+
+const CHUNK_SIZE = 9999;
+
+Array.prototype.unique = function() {
+	return [...new Set(this)];
+};
 
 // 용량이 크므로 plain array로 처리
 export let emails = [];
@@ -10,6 +16,7 @@ export let emailLength = (() => {
 
 	const update = () => {
 		set(emails.length);
+		download.reset();
 	};
 
 	return {
@@ -18,13 +25,8 @@ export let emailLength = (() => {
 	};
 })();
 
-export const insertEmail = email => {
-	emails.push(email);
-};
-
-export const removeEmail = email => {
-	const index = emails.indexOf(email);
-	emails.splice(index, 1);
+export const resetEmails = () => {
+	emails = [];
 };
 
 export const step = (() => {
@@ -32,14 +34,12 @@ export const step = (() => {
 
 	const next = () =>
 		update(_ => {
-			emailLength.update();
 			_++;
 			return _;
 		});
 
 	const prev = () =>
 		update(_ => {
-			emailLength.update();
 			_--;
 			return _;
 		});
@@ -61,34 +61,64 @@ export const extractEmailFromLine = {
 	insert: line => {
 		const email = getCleanedEmail(line);
 		if (email !== null) {
-			insertEmail(email);
+			emails.push(email);
 		}
 	},
 	remove: line => {
 		const email = getCleanedEmail(line);
 		if (email !== null) {
-			removeEmail(email);
+			const index = emails.indexOf(email);
+			if (index > -1) {
+				emails.splice(index, 1);
+			}
 		}
 	},
 };
 
-export const downloadEmalsAsCsv = () => {
-	var i,
-		j,
-		times,
-		chunk = 9999;
-	for (i = 0, j = emails.length, times = 0; i < j; i += chunk) {
-		const chunkArr = emails.slice(i, i + chunk);
-		downloadEachChunk(chunkArr, ++times);
-	}
-	step.next();
+export const completeImport = () => {
+	emails = emails.unique();
+	emailLength.update();
 };
 
-const downloadEachChunk = (chunkArr, times) => {
+export const download = (() => {
+	const initData = () => {
+		return {
+			count: 0,
+			total: Math.ceil(emails.length / CHUNK_SIZE),
+		};
+	};
+	const { set, update, subscribe } = writable(initData());
+
+	const saveAs = () =>
+		update(_ => {
+			let i, j, times;
+			for (i = 0, j = emails.length, times = 0; i < j; i += CHUNK_SIZE) {
+				if (_.count === times) {
+					const chunkArr = emails.slice(i, i + CHUNK_SIZE);
+					downloadEachChunk(chunkArr, _.count + 1);
+				}
+				times++;
+			}
+			_.count++;
+			return _;
+		});
+
+	const reset = () => {
+		set(initData());
+	};
+
+	return {
+		saveAs,
+		reset,
+		subscribe,
+	};
+})();
+
+const downloadEachChunk = (chunkArr, count) => {
 	const arrWithNum = chunkArr.map((email, i) => {
 		return [i + 1, email];
 	});
-	var blob = new Blob(
+	const blob = new Blob(
 		[
 			Papa.unparse(arrWithNum, {
 				quotes: true,
@@ -100,10 +130,12 @@ const downloadEachChunk = (chunkArr, times) => {
 			type: 'text/csv;charset=utf-8',
 		}
 	);
-	FileSaver.saveAs(
-		blob,
-		`emails-${step == 1 ? 'raw' : 'clean'}-${
-			times < 10 ? '0' : ''
-		}${times}.csv`
-	);
+	const isRaw = get(step) === 1;
+	let filename = `emails-${isRaw ? 'raw' : 'cleaned'}-${
+		count < 10 ? '0' : ''
+	}${count}`;
+	if (!isRaw) {
+		filename = filename.toUpperCase();
+	}
+	FileSaver.saveAs(blob, `${filename}.csv`);
 };
