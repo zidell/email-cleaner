@@ -5,6 +5,7 @@
 	import Downloader from './Downloader.svelte';
 	import WrongEmails from './WrongEmails.svelte';
 	import Complete from './Complete.svelte';
+	import Info from './Info.svelte';
 
 	const compArr = [Importer, Downloader, WrongEmails, Downloader, Complete];
 </script>
@@ -23,4 +24,5 @@
 	<div id="body">
 		<svelte:component this="{compArr[$step]}" />
 	</div>
+	<Info />
 </div>

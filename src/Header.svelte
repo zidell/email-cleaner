@@ -1,5 +1,9 @@
 <script>
-	import { step, restart } from './store.js';
+	import { step, restart, info } from './store.js';
+
+	const openInfo = () => {
+		$info = true;
+	};
 </script>
 
 <style lang="scss">
@@ -18,11 +22,21 @@
 			font-weight: bold;
 			cursor: pointer;
 		}
+		.btn {
+			line-height: 1.1;
+			padding-top: 6px;
+			opacity: 0.7;
+		}
 	}
 </style>
 
 <div id="header">
-	<a on:click="{restart}">이메일클리너</a>
+	<div>
+		<a on:click="{restart}">이메일클리너</a>
+		<button class="btn btn-sm btn-outline-secondary" on:click="{openInfo}">
+			정보
+		</button>
+	</div>
 	<div>
 		{$step + 1} / 5
 	</div>

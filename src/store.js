@@ -27,6 +27,8 @@ export let emailLength = (() => {
 	};
 })();
 
+export let info = writable(!localStorage.defaultShow);
+
 export let restart = () => {
 	if (confirm('처음부터 다시 시작하시겠습니까?')) {
 		location.reload();
