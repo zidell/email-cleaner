@@ -2,7 +2,7 @@ import { writable, get } from 'svelte/store';
 import FileSaver from 'file-saver';
 import Papa from 'papaparse';
 
-const fx = new Audio('/mario-coin-sound.mp3');
+const fx = new Audio('/mario-coin-sound.mp3'); //
 
 const CHUNK_SIZE = 9999;
 
