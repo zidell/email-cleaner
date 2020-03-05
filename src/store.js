@@ -128,9 +128,14 @@ const downloadEachChunk = (chunkArr, count) => {
 	fx.volume = 0.7;
 	fx.currentTime = 0;
 	fx.play();
+
 	const arrWithNum = chunkArr.map((email, i) => {
 		return [i + 1, email];
 	});
+
+	// insert header
+	arrWithNum.unshift(["num","receiver_address"]);
+
 	const blob = new Blob(
 		[
 			Papa.unparse(arrWithNum, {
